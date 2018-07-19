@@ -4,12 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import firebase from 'firebase'
+import VueFire from 'vuefire'
+
 require('../css/style.css')
 require('../vendors/iconfonts/mdi/css/materialdesignicons.min.css')
 require('../vendors/css/vendor.bundle.base.css')
 require('../css/style.css')
 require('../images/favicon.png')
 Vue.config.productionTip = false
+Vue.use(VueFire);
 
 /* eslint-disable no-new */
 
@@ -26,6 +29,8 @@ let config = {
 };
 firebase.initializeApp(config);
 
+
+
 firebase.auth().onAuthStateChanged(function(user) {
   if (!app) {
     /* eslint-disable no-new */
@@ -37,3 +42,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     })
   }
 });
+
+
+export const db= app.database();
+export const namesRef=db.ref('names');
+
+
